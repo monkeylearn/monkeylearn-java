@@ -1,0 +1,58 @@
+package com.monkeylearn.sdk;
+
+import com.monkeylearn.sdk.Settings;
+import com.monkeylearn.sdk.SleepRequests;
+import com.monkeylearn.sdk.Tuple;
+import com.monkeylearn.sdk.MonkeyLearnException;
+import com.monkeylearn.sdk.MonkeyLearnResponse;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
+import org.apache.http.Header;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Extraction extends SleepRequests {
+    private String token;
+    private String endpoint;
+
+    public Extraction(String token, String baseEndpoint) {
+        super(token);
+        this.token = token;
+        this.endpoint = baseEndpoint + "extractors/";
+    }
+
+    public MonkeyLearnResponse extract(String moduleId, String[] textList,
+                    int batchSize, boolean sleepIfThrottled) throws MonkeyLearnException {
+        String url = this.endpoint + moduleId + "/extract/";
+
+        HandleErrors.checkBatchLimits(textList, batchSize);
+
+        Header[][] headers = new Header[(int) Math.ceil((float)textList.length / (float) batchSize)][];
+        JSONArray result = new JSONArray();
+
+        for (int i = 0; i < textList.length; i += batchSize) {
+            JSONObject data = new JSONObject();
+            JSONArray text_list = new JSONArray();
+            for (String elem : Arrays.copyOfRange(textList, i, Math.min(i + batchSize, textList.length))) {
+                text_list.add(elem);
+            }
+            data.put("text_list", text_list);
+            Tuple<JSONObject, Header[]> response = this.makeRequest(url, "POST", data, sleepIfThrottled);
+            headers[i/batchSize] = response.getF2();
+            JSONArray resultJson = (JSONArray)response.getF1().get("result");
+            for (int j = 0; j < resultJson.size(); j++) {
+                result.add(resultJson.get(j));
+            }
+        }
+
+        return new MonkeyLearnResponse(result, headers);
+    }
+
+    public MonkeyLearnResponse extract(String moduleId, String[] textList)
+            throws MonkeyLearnException {
+        return this.extract(moduleId, textList, Settings.DEFAULT_BATCH_SIZE, true);
+    }
+}
