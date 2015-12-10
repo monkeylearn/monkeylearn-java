@@ -27,6 +27,7 @@ Here are some examples of how to use the library in order to create and use clas
 ```java
 import com.monkeylearn.MonkeyLearn;
 import com.monkeylearn.MonkeyLearnResponse;
+import com.monkeylearn.MonkeyLearnException;
 import com.monkeylearn.Tuple;
 
 import org.json.simple.JSONObject;
@@ -80,6 +81,7 @@ You can also use the sdk with extractors and pipelines:
 ```java
 import com.monkeylearn.MonkeyLearn;
 import com.monkeylearn.MonkeyLearnResponse;
+import com.monkeylearn.MonkeyLearnException;
 import com.monkeylearn.Tuple;
 
 import org.json.simple.JSONObject;
