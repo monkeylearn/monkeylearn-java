@@ -25,8 +25,6 @@ Usage examples
 
 Here are some examples of how to use the library in order to create and use classifiers:
 ```java
-package com.monkeylearn.sdk;
-
 import com.monkeylearn.sdk.MonkeyLearn;
 import com.monkeylearn.sdk.MonkeyLearnResponse;
 import com.monkeylearn.sdk.Tuple;
@@ -80,8 +78,6 @@ public class App {
 You can also use the sdk with extractors and pipelines:
     
 ```java
-package com.monkeylearn.sdk;
-
 import com.monkeylearn.sdk.MonkeyLearn;
 import com.monkeylearn.sdk.MonkeyLearnResponse;
 import com.monkeylearn.sdk.Tuple;
