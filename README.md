@@ -1,2 +1,111 @@
 # monkeylearn-java
 Official Java client for the MonkeyLearn API. Build and consume machine learning models for language processing from your Java apps.
+
+Install
+-------
+
+Using maven:
+
+    <dependency>
+      <groupId>com.monkeylearn.sdk</groupId>
+      <artifactId>monkeylearn-java</artifactId>
+      <version>0.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    
+Or if you want to compile it yourself:
+
+    $ git clone git@github.com:monkeylearn/monkeylearn-java
+    $ cd monkeylearn-java
+    $ mvn install       # Requires maven, download from http://maven.apache.org/download.html
+
+
+Usage examples
+--------------
+
+Here are some examples of how to use the library in order to create and use classifiers:
+```java
+package com.monkeylearn.sdk;
+
+import com.monkeylearn.sdk.MonkeyLearn;
+import com.monkeylearn.sdk.MonkeyLearnResponse;
+import com.monkeylearn.sdk.Tuple;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
+import java.util.ArrayList;
+
+public class App {
+    public static void main( String[] args ) throws MonkeyLearnException {
+
+        // Use the API key from your account
+        MonkeyLearn ml = new MonkeyLearn("<YOUR API KEY HERE>");
+
+        // Create a new classifier
+        MonkeyLearnResponse res = ml.classifiers.create("Test Classifier", "Some description");
+
+        // Get the id of the new module
+        String moduleId = (String) ((JSONObject)res.jsonResult.get("classifier")).get("hashed_id");
+
+        // Get the id of the root node
+        res = ml.classifiers.detail(moduleId);
+        Integer rootId = ((Long) ((JSONObject)((JSONArray)res.jsonResult.get("sandbox_categories")).get(0)).get("id")).intValue();
+
+        // Create two new categories on the root node
+        res = ml.classifiers.categories.create(moduleId, "Negative", rootId);
+        Integer negativeId = ((Long) ((JSONObject)res.jsonResult.get("category")).get("id")).intValue();
+        res = ml.classifiers.categories.create(moduleId, "Positive", rootId);
+        Integer positiveId = ((Long) ((JSONObject)res.jsonResult.get("category")).get("id")).intValue();
+
+        // Now let's upload some samples
+        ArrayList samples = new ArrayList();
+        samples.add(new Tuple<String, Integer>("The movie was terrible, I hated it.", negativeId));
+        samples.add(new Tuple<String, Integer>("I love this movie, I want to watch it again!", positiveId));
+        res = ml.classifiers.uploadSamples(moduleId, samples);
+
+        // Now let's train the module!
+        res = ml.classifiers.train(moduleId);
+
+        // Classify some texts
+        String[] textList = {"I love the movie", "I hate the movie"};
+        res = ml.classifiers.classify(moduleId, textList, true);
+
+        System.out.println( res.arrayResult );
+    }
+}
+
+```
+
+You can also use the sdk with extractors and pipelines:
+    
+```java
+package com.monkeylearn.sdk;
+
+import com.monkeylearn.sdk.MonkeyLearn;
+import com.monkeylearn.sdk.MonkeyLearnResponse;
+import com.monkeylearn.sdk.Tuple;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
+import java.util.ArrayList;
+
+public class App {
+    public static void main( String[] args ) throws MonkeyLearnException {
+
+        // Use the API key from your account
+        MonkeyLearn ml = new MonkeyLearn("<YOUR API KEY HERE>");
+
+        // Use the keyword extractor
+        String[] textList = {"I love the movie", "I hate the movie"};
+        MonkeyLearnResponse res = ml.extractors.extract("ex_y7BPYzNG", textList);
+        System.out.println( res.arrayResult );
+        
+        // Use a pipeline
+        // MonkeyLearnResponse res = ml.pipelines.run("<Pipeline ID>", someJsonHere);
+        // System.out.println( res.arrayResult );
+    }
+}
+
+```
