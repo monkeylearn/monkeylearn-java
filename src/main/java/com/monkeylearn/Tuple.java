@@ -1,4 +1,4 @@
-package com.monkeylearn.sdk;
+package com.monkeylearn;
 
 public class Tuple<T1,T2> {
   private T1 f1;

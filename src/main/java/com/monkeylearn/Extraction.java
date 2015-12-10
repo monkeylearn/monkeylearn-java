@@ -1,10 +1,10 @@
-package com.monkeylearn.sdk;
+package com.monkeylearn;
 
-import com.monkeylearn.sdk.Settings;
-import com.monkeylearn.sdk.SleepRequests;
-import com.monkeylearn.sdk.Tuple;
-import com.monkeylearn.sdk.MonkeyLearnException;
-import com.monkeylearn.sdk.MonkeyLearnResponse;
+import com.monkeylearn.Settings;
+import com.monkeylearn.SleepRequests;
+import com.monkeylearn.Tuple;
+import com.monkeylearn.MonkeyLearnException;
+import com.monkeylearn.MonkeyLearnResponse;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;

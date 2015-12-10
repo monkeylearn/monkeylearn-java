@@ -1,7 +1,7 @@
-package com.monkeylearn.sdk;
+package com.monkeylearn;
 
-import com.monkeylearn.sdk.Settings;
-import com.monkeylearn.sdk.MonkeyLearnException;
+import com.monkeylearn.Settings;
+import com.monkeylearn.MonkeyLearnException;
 
 public class HandleErrors {
     static public void checkBatchLimits(String[] textList, int batchSize) throws MonkeyLearnException {

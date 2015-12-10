@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.monkeylearn.sdk</groupId>
+  <groupId>com.monkeylearn</groupId>
   <artifactId>monkeylearn-java</artifactId>
   <packaging>jar</packaging>
   <version>0.1.0</version>
@@ -20,6 +20,20 @@
     <connection>scm:git:git@github.com:monkeylearn/monkeylearn-java.git</connection>
     <developerConnection>scm:git:git@github.com:monkeylearn/monkeylearn-java.git</developerConnection>
   </scm>
+  <developers>
+    <developer>
+      <id>monkeylearn</id>
+      <name>monkeylearn</name>
+      <email>hello@monkeylearn.com</email>
+      <organization>MonkeyLearn</organization>
+      <organizationUrl>http://www.monkeylearn.com</organizationUrl>
+      <timezone>-3</timezone>
+    </developer>
+  </developers>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

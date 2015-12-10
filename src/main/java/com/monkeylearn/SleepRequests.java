@@ -1,8 +1,8 @@
-package com.monkeylearn.sdk;
+package com.monkeylearn;
 
-import com.monkeylearn.sdk.RestClient;
-import com.monkeylearn.sdk.Tuple;
-import com.monkeylearn.sdk.MonkeyLearnException;
+import com.monkeylearn.RestClient;
+import com.monkeylearn.Tuple;
+import com.monkeylearn.MonkeyLearnException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;

@@ -7,12 +7,12 @@ Install
 Using maven:
 
     <dependency>
-      <groupId>com.monkeylearn.sdk</groupId>
+      <groupId>com.monkeylearn</groupId>
       <artifactId>monkeylearn-java</artifactId>
       <version>0.1.0</version>
       <scope>compile</scope>
     </dependency>
-    
+
 Or if you want to compile it yourself:
 
     $ git clone git@github.com:monkeylearn/monkeylearn-java
@@ -25,9 +25,9 @@ Usage examples
 
 Here are some examples of how to use the library in order to create and use classifiers:
 ```java
-import com.monkeylearn.sdk.MonkeyLearn;
-import com.monkeylearn.sdk.MonkeyLearnResponse;
-import com.monkeylearn.sdk.Tuple;
+import com.monkeylearn.MonkeyLearn;
+import com.monkeylearn.MonkeyLearnResponse;
+import com.monkeylearn.Tuple;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -76,11 +76,11 @@ public class App {
 ```
 
 You can also use the sdk with extractors and pipelines:
-    
+
 ```java
-import com.monkeylearn.sdk.MonkeyLearn;
-import com.monkeylearn.sdk.MonkeyLearnResponse;
-import com.monkeylearn.sdk.Tuple;
+import com.monkeylearn.MonkeyLearn;
+import com.monkeylearn.MonkeyLearnResponse;
+import com.monkeylearn.Tuple;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -97,7 +97,7 @@ public class App {
         String[] textList = {"I love the movie", "I hate the movie"};
         MonkeyLearnResponse res = ml.extractors.extract("ex_y7BPYzNG", textList);
         System.out.println( res.arrayResult );
-        
+
         // Use a pipeline
         // MonkeyLearnResponse res = ml.pipelines.run("<Pipeline ID>", someJsonHere);
         // System.out.println( res.arrayResult );

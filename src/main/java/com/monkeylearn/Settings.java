@@ -1,4 +1,4 @@
-package com.monkeylearn.sdk;
+package com.monkeylearn;
 
 public class Settings {
     public static final int DEFAULT_BATCH_SIZE = 200;

@@ -1,9 +1,9 @@
-package com.monkeylearn.sdk;
+package com.monkeylearn;
 
-import com.monkeylearn.sdk.Classification;
-import com.monkeylearn.sdk.Extraction;
-import com.monkeylearn.sdk.Pipelines;
-import com.monkeylearn.sdk.Settings;
+import com.monkeylearn.Classification;
+import com.monkeylearn.Extraction;
+import com.monkeylearn.Pipelines;
+import com.monkeylearn.Settings;
 
 public class MonkeyLearn {
     public Classification classifiers;
