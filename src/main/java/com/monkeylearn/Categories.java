@@ -14,7 +14,7 @@ import org.apache.http.Header;
 import java.util.Arrays;
 import java.util.List;
 
-class Categories extends SleepRequests {
+public class Categories extends SleepRequests {
     private String token;
     private String endpoint;
 

@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.apache.http.Header;
 
-class MonkeyLearnResponse {
+public class MonkeyLearnResponse {
 
     public JSONObject jsonResult;
     public JSONArray arrayResult;
