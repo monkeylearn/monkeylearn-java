@@ -82,16 +82,27 @@ public class Classification extends SleepRequests {
         return this.detail(moduleId, true);
     }
 
-    public MonkeyLearnResponse uploadSamples(String moduleId, List<Tuple<String, Integer>> samplesWithCategories, boolean sleepIfThrottled)
+    public MonkeyLearnResponse uploadSamples(String moduleId, List<Tuple<String, Object>> samplesWithCategories, boolean sleepIfThrottled)
             throws MonkeyLearnException {
         String url = this.endpoint + moduleId + "/samples/";
         JSONArray samples = new JSONArray();
-        for (Tuple<String, Integer> t: samplesWithCategories) {
+        for (Tuple<String, Object> t: samplesWithCategories) {
             JSONObject sample = new JSONObject();
             sample.put("text", t.getF1());
-            sample.put("category_id", t.getF2());
+            if (t.getF2() instanceof Integer[]) {
+                JSONArray categoriesIds = new JSONArray();
+                for (Integer i: (Integer[]) t.getF2()) {
+                    categoriesIds.add(i);
+                }
+                sample.put("category_id", categoriesIds);
+            } else if (t.getF2() instanceof Integer) {
+                sample.put("category_id", t.getF2());
+            } else {
+                throw new MonkeyLearnException("Categories ids must be integers.");
+            }
             samples.add(sample);
         }
+
         JSONObject data = new JSONObject();
         data.put("samples", samples);
         Tuple<JSONObject, Header[]> response = this.makeRequest(url, "POST", data, sleepIfThrottled);
@@ -100,7 +111,7 @@ public class Classification extends SleepRequests {
         return new MonkeyLearnResponse(response.getF1().get("result"), headers);
     }
 
-    public MonkeyLearnResponse uploadSamples(String moduleId, List<Tuple<String, Integer>> samplesWithCategories)
+    public MonkeyLearnResponse uploadSamples(String moduleId, List<Tuple<String, Object>> samplesWithCategories)
             throws MonkeyLearnException {
         return this.uploadSamples(moduleId, samplesWithCategories, true);
     }
