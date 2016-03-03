@@ -69,6 +69,19 @@ public class Classification extends SleepRequests {
         return this.classify(moduleId, textList, sandbox, Settings.DEFAULT_BATCH_SIZE, true);
     }
 
+    public MonkeyLearnResponse list(boolean sleepIfThrottled)
+            throws MonkeyLearnException {
+        String url = this.endpoint;
+        Tuple<JSONObject, Header[]> response = this.makeRequest(url, "GET", null, sleepIfThrottled);
+        Header[][] headers = new Header[1][];
+        headers[0] = response.getF2();
+        return new MonkeyLearnResponse(response.getF1().get("result"), headers);
+    }
+
+    public MonkeyLearnResponse list() throws MonkeyLearnException {
+        return this.list(true);
+    }
+
     public MonkeyLearnResponse detail(String moduleId, boolean sleepIfThrottled)
             throws MonkeyLearnException {
         String url = this.endpoint + moduleId + "/";
