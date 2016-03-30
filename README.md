@@ -9,7 +9,7 @@ Using maven:
     <dependency>
       <groupId>com.monkeylearn</groupId>
       <artifactId>monkeylearn-java</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.1</version>
       <scope>compile</scope>
     </dependency>
 
@@ -18,8 +18,8 @@ Or if you want to compile it yourself:
     $ git clone git@github.com:monkeylearn/monkeylearn-java
     $ cd monkeylearn-java
     $ mvn install       # Requires maven, download from http://maven.apache.org/download.html
-    
-You can also download the compiled jar from [here](http://repo.maven.apache.org/maven2/com/monkeylearn/monkeylearn-java/0.1.0/monkeylearn-java-0.1.0-jar-with-dependencies.jar).
+
+You can also download the compiled jar from [here](http://repo.maven.apache.org/maven2/com/monkeylearn/monkeylearn-java/0.1.1/monkeylearn-java-0.1.1-jar-with-dependencies.jar).
 
 
 Usage examples

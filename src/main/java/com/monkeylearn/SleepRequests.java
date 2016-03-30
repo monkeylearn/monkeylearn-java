@@ -32,6 +32,7 @@ public class SleepRequests {
             }
             client.AddHeader("Authorization", "Token " + this.token);
             client.AddHeader("Content-Type", "application/json");
+            client.AddHeader("User-Agent", "java-sdk");
             try {
                 if (method.equals("POST")) {
                     client.Execute(RestClient.RequestMethod.POST);
