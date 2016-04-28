@@ -117,7 +117,7 @@ public class Classification extends SleepRequests {
                 }
                 sample.put("category_path", categoriesPaths);
             } else if (t.getF2() instanceof String) {
-                sample.put("category_id", t.getF2());
+                sample.put("category_path", t.getF2());
             } else {
                 throw new MonkeyLearnException("Categories must be set as ids or paths.");
             }
