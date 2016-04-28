@@ -19,7 +19,7 @@ Or if you want to compile it yourself:
     $ cd monkeylearn-java
     $ mvn install       # Requires maven, download from http://maven.apache.org/download.html
 
-You can also download the compiled jar from [here](http://repo.maven.apache.org/maven2/com/monkeylearn/monkeylearn-java/0.1.2/monkeylearn-java-0.1.2-jar-with-dependencies.jar).
+You can also download the compiled jar from [here](https://oss.sonatype.org/service/local/repositories/releases/content/com/monkeylearn/monkeylearn-java/0.1.2/monkeylearn-java-0.1.2-jar-with-dependencies.jar).
 
 
 Usage examples
