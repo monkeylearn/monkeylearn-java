@@ -24,6 +24,19 @@ public class Categories extends SleepRequests {
         this.endpoint = baseEndpoint + "classifiers/";
     }
 
+    public MonkeyLearnResponse detail(String moduleId, int category_id, boolean sleepIfThrottled)
+            throws MonkeyLearnException {
+        String url = this.endpoint + module_id + "/categories/" + category_id + "/";
+        Tuple<JSONObject, Header[]> response = this.makeRequest(url, "GET", null, sleepIfThrottled);
+        Header[][] headers = new Header[1][];
+        headers[0] = response.getF2();
+        return new MonkeyLearnResponse(response.getF1().get("result"), headers);
+    }
+
+    public MonkeyLearnResponse detail(String moduleId, int category_id) throws MonkeyLearnException {
+        return this.detail(moduleId, category_id, true);
+    }
+
     public MonkeyLearnResponse create(String module_id, String name, int parent_id,
                boolean sleepIfThrottled)
             throws MonkeyLearnException {
