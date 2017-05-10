@@ -18,8 +18,8 @@ public class Categories extends SleepRequests {
     private String token;
     private String endpoint;
 
-    public Categories(String token, String baseEndpoint) {
-        super(token);
+    public Categories(String token, String baseEndpoint, String userAgent) {
+        super(token, userAgent);
         this.token = token;
         this.endpoint = baseEndpoint + "classifiers/";
     }

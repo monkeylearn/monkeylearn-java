@@ -22,11 +22,11 @@ public class Classification extends SleepRequests {
     private String endpoint;
     public Categories categories;
 
-    public Classification(String token, String baseEndpoint) {
-        super(token);
+    public Classification(String token, String baseEndpoint, String userAgent) {
+        super(token, userAgent);
         this.token = token;
         this.endpoint = baseEndpoint + "classifiers/";
-        this.categories = new Categories(token, baseEndpoint);
+        this.categories = new Categories(token, baseEndpoint, userAgent);
     }
 
     public MonkeyLearnResponse classify(String moduleId, String[] textList, boolean sandbox,

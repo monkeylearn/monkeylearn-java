@@ -18,8 +18,8 @@ public class Pipelines extends SleepRequests {
     private String token;
     private String endpoint;
 
-    public Pipelines(String token, String baseEndpoint) {
-        super(token);
+    public Pipelines(String token, String baseEndpoint, String userAgent) {
+        super(token, userAgent);
         this.token = token;
         this.endpoint = baseEndpoint + "pipelines/";
     }

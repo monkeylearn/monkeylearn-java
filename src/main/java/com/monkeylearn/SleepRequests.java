@@ -17,9 +17,11 @@ import java.util.regex.Matcher;
 public class SleepRequests {
 
     private String token;
+    private String userAgent;
 
-    public SleepRequests(String token) {
+    public SleepRequests(String token, String userAgent) {
         this.token = token;
+        this.userAgent = userAgent;
     }
 
     public Tuple<JSONObject, Header[]> makeRequest(String url, String method,
@@ -32,7 +34,7 @@ public class SleepRequests {
             }
             client.AddHeader("Authorization", "Token " + this.token);
             client.AddHeader("Content-Type", "application/json");
-            client.AddHeader("User-Agent", "java-sdk");
+            client.AddHeader("User-Agent", this.userAgent);
             try {
                 if (method.equals("POST")) {
                     client.Execute(RestClient.RequestMethod.POST);
