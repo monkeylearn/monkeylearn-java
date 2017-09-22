@@ -48,7 +48,7 @@ public class SleepRequests {
                     client.Execute(RestClient.RequestMethod.PATCH);
                 }
             } catch (Exception e) {
-                // do something
+                e.printStackTrace();
             }
 
             int code = client.getResponseCode();
