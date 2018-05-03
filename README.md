@@ -78,13 +78,14 @@ public class App {
 
 ```
 
-You can also use the sdk with extractors and pipelines:
+You can also use the sdk with extractors:
 
 ```java
 import com.monkeylearn.MonkeyLearn;
 import com.monkeylearn.MonkeyLearnResponse;
 import com.monkeylearn.MonkeyLearnException;
 import com.monkeylearn.Tuple;
+import com.monkeylearn.ExtraParam;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -99,12 +100,11 @@ public class App {
 
         // Use the keyword extractor
         String[] textList = {"I love the movie", "I hate the movie"};
-        MonkeyLearnResponse res = ml.extractors.extract("ex_y7BPYzNG", textList);
+        ExtraParam[] extraParams = {new ExtraParam("max_keywords", "30")};
+        MonkeyLearnResponse res = ml.extractors.extract("ex_y7BPYzNG", textList, extraParams);
         System.out.println( res.arrayResult );
 
-        // Use a pipeline
-        // MonkeyLearnResponse res = ml.pipelines.run("<Pipeline ID>", someJsonHere);
-        // System.out.println( res.arrayResult );
+
     }
 }
 
