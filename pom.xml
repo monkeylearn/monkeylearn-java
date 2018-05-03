@@ -4,7 +4,7 @@
   <groupId>com.monkeylearn</groupId>
   <artifactId>monkeylearn-java</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.4</version>
+  <version>0.1.5</version>
   <name>monkeylearn-java</name>
   <description>Official Java client for the MonkeyLearn API.</description>
   <url>http://monkeylearn.com</url>

@@ -5,6 +5,7 @@ import com.monkeylearn.SleepRequests;
 import com.monkeylearn.Tuple;
 import com.monkeylearn.MonkeyLearnException;
 import com.monkeylearn.MonkeyLearnResponse;
+import com.monkeylearn.ExtraParam;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -25,7 +26,7 @@ public class Extraction extends SleepRequests {
     }
 
     public MonkeyLearnResponse extract(String moduleId, String[] textList,
-                    int batchSize, boolean sleepIfThrottled) throws MonkeyLearnException {
+                    int batchSize, boolean sleepIfThrottled, ExtraParam... extraParams) throws MonkeyLearnException {
         String url = this.endpoint + moduleId + "/extract/";
 
         HandleErrors.checkBatchLimits(textList, batchSize);
@@ -39,6 +40,9 @@ public class Extraction extends SleepRequests {
             for (String elem : Arrays.copyOfRange(textList, i, Math.min(i + batchSize, textList.length))) {
                 text_list.add(elem);
             }
+            for (ExtraParam param : extraParams) {
+              data.put(param.getParamName(), param.getParamValue());
+            }
             data.put("text_list", text_list);
             Tuple<JSONObject, Header[]> response = this.makeRequest(url, "POST", data, sleepIfThrottled);
             headers[i/batchSize] = response.getF2();
@@ -51,8 +55,8 @@ public class Extraction extends SleepRequests {
         return new MonkeyLearnResponse(result, headers);
     }
 
-    public MonkeyLearnResponse extract(String moduleId, String[] textList)
+    public MonkeyLearnResponse extract(String moduleId, String[] textList, ExtraParam... extraParams)
             throws MonkeyLearnException {
-        return this.extract(moduleId, textList, Settings.DEFAULT_BATCH_SIZE, true);
+        return this.extract(moduleId, textList, Settings.DEFAULT_BATCH_SIZE, true, extraParams);
     }
 }
